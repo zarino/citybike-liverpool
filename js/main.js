@@ -14,3 +14,17 @@ $.getJSON('https://gist.githubusercontent.com/paulfurley/723698b43127ddf9fe1c/ra
   });
 });
 
+var LocateMeControl = L.Control.extend({
+  options: {
+    position: 'topleft'
+  },
+  onAdd: function(map) {
+    var container = L.DomUtil.create('div', 'locate-me');
+    L.DomEvent.addListener(container, 'click', function(){
+      window.map.locate({setView: true});
+    });
+    return container;
+  }
+});
+
+window.map.addControl(new LocateMeControl());
