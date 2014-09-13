@@ -28,3 +28,31 @@ var LocateMeControl = L.Control.extend({
 });
 
 window.map.addControl(new LocateMeControl());
+
+var showCurrentLocation = function(e) {
+  if('currentLocationRadius' in window){
+    window.currentLocationRadius.setLatLng(e.latlng);
+  } else {
+    window.currentLocationRadius = L.circle(e.latlng, e.accuracy / 2, {
+      stroke: false,
+      fillColor: '#1e74ed',
+      fillOpacity: 0.2,
+      clickable: false
+    }).addTo(window.map);
+  }
+  if('currentLocationMarker' in window){
+    window.currentLocationMarker.setLatLng(e.latlng);
+  } else {
+    window.currentLocationMarker = L.circleMarker(e.latlng, {
+      radius: 10,
+      color: '#fff',
+      opacity: 1,
+      weight: 6,
+      fillColor: '#1e74ed',
+      fillOpacity: 1,
+      clickable: false
+    }).addTo(window.map);
+  }
+}
+
+window.map.on('locationfound', showCurrentLocation);
