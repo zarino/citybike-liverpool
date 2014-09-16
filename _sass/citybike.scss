@@ -1,9 +1,12 @@
 $crosshair-16px: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAQAAAC1+jfqAAAAzElEQVR4AZXRsWdDQRwH8A/hEUoJIVOmrKUcmTKVTl1L/4NSStdMJXTq1CmETCWU0imUEjp1elMpoYRO5RFK6VRa3vAbjpR+huPL/dz37mSGDv1p7MRG+yYqK5d25bTMLQ0tXBupXCkQCk8mmnFE24Mpwqn7rEPTq4HwHKGrHUMzIOn71peiWkOSHFlJdiiVfur1EbBVpxdfSnNgrSN3YCFMjeQveedM6KoMIG5xbKlA2PPhwna9oWPmTU+m58anyru1sZYNbp3/8zd/AdNxNlU3PO9QAAAAAElFTkSuQmCC';
 $crosshair-32px: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAABcUlEQVR4AeXVQWRbcRwH8A8hjFB2GjmNnsoIoZSSUygj11JGT7uOncoYJYTSU+lpjDJy2mmMMcLIKYQyxhi7lvAI4/H47RKP9f29PHaafb6X/z+Hb/jl917U6liY+Qs7QvavFjwwcuWLUPjk0pGWxjrG1uJeVl5qa2DgTghzrzwV1obO3Qrhmye2eCYX5vYrMxhabupqjBTCRCs5xLZr4Zd9aboy4bz2V3gr/NSRdC18pLagbSGcSdhVyO1uKeBQyHRUnAlTf2rp67lvLpyomKU/lv6qGxUr4ZEmDoSl0mKTEJblbVZ9sMt8FfLNeUokk1EZZyq39DfJhUF561XHWeZY+LE57ykthUNNnAjvVVwJF5qYCi/Ss13Z2fpOfCxX6Er4LEy2buI74Y2knkJhVFvwXFjr1u3Y2hHSBady4ViNG6Ew0akUPHQthNdNNj3cGTsoC4YuZELutNmuz0UiH+xpbODSd+XCGuv/b39tzQt+Aw8P2BzkXUfYAAAAAElFTkSuQmCC';
 
+$toolbar-height: 50px;
+$toolbar-padding: 10px;
+
 #map {
   position: absolute;
-  top: 0;
+  top: $toolbar-height;
   left: 0;
   bottom: 0;
   right: 0;
@@ -57,4 +60,58 @@ $crosshair-32px: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZ
   line-height: 18px;
   color: #026F02;
   text-shadow: 0 1px 0 #fff;
+}
+
+#toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $toolbar-height;
+  z-index: 1;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+  background: #fff;
+  text-align: center;
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+
+  li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 50%;
+  }
+
+  li + li {
+    right: 0;
+    left: 50%;
+
+    a {
+      margin: $toolbar-padding $toolbar-padding 0 ($toolbar-padding/2);
+    }
+  }
+
+  a {
+    box-sizing: border-box;
+    display: block;
+    border-radius: 4px;
+    margin: $toolbar-padding ($toolbar-padding/2) 0 $toolbar-padding;
+    line-height: $toolbar-height - ($toolbar-padding*2);
+    background-color: #eee;
+    color: #777;
+    cursor: pointer;
+
+    &:hover {
+      background-color: mix(#eee, #fff, 50%);
+    }
+
+    &.active {
+      background-color: green;
+      color: #fff;
+
+      &:hover {
+        background-color: mix(green, #fff, 85%);
+      }
+    }
+  }
 }
