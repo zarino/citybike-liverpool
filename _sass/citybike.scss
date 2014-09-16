@@ -15,6 +15,15 @@ $crosshair-32px: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZ
 
 .leaflet-popup-content {
   margin: 10px 14px;
+  text-align: center;
+
+  h2 {
+    font-weight: bold;
+  }
+
+  p {
+    margin: 0;
+  }
 }
 
 .locate-me {
@@ -34,4 +43,18 @@ $crosshair-32px: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZ
   &:hover, &:focus {
     background-color: #f4f4f4;
   }
+}
+
+.leaflet-marker-icon .number {
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: 0;
+  display: block;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 18px;
+  color: #026F02;
+  text-shadow: 0 1px 0 #fff;
 }
