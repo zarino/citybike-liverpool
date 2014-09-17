@@ -30,25 +30,6 @@ var generatePopupHTML = function(locationName, availableBikes, availableLocks){
   return $wrapper.html();
 }
 
-window.map = L.map('map').setView([53.404973, -2.979250], 14);
-
-window.map.addLayer(new L.StamenTileLayer("toner-lite"));
-
-window.markers = L.layerGroup().addTo(map);
-
-$.getJSON('https://gist.githubusercontent.com/paulfurley/723698b43127ddf9fe1c/raw/0778350edf1d2774476205d3a865b9ba560b15d2/citybike.json', function(apiResponse){
-  $.each(apiResponse.locations, function(){
-    var marker = L.marker([this.latitude, this.longitude], {
-      icon: new NumberedIcon({ number: this.availableBikes })
-    });
-    marker.data = this;
-    marker.bindPopup(generatePopupHTML(this.locationName, this.availableBikes, this.availableLocks), {
-      closeButton: false
-    });
-    window.markers.addLayer(marker);
-  });
-});
-
 var LocateMeControl = L.Control.extend({
   options: {
     position: 'topleft'
@@ -61,8 +42,6 @@ var LocateMeControl = L.Control.extend({
     return container;
   }
 });
-
-window.map.addControl(new LocateMeControl());
 
 var showCurrentLocation = function(e) {
   if('currentLocationRadius' in window){
@@ -90,8 +69,6 @@ var showCurrentLocation = function(e) {
   }
 }
 
-window.map.on('locationfound', showCurrentLocation);
-
 var switchMarkerNumbers = function(){
   if($('#show-bikes').is('.active')){
     window.markers.eachLayer(function(marker){
@@ -103,6 +80,29 @@ var switchMarkerNumbers = function(){
     })
   }
 }
+
+window.map = L.map('map').setView([53.404973, -2.979250], 14);
+
+window.map.addLayer(new L.StamenTileLayer("toner-lite"));
+
+window.map.addControl(new LocateMeControl());
+
+window.map.on('locationfound', showCurrentLocation);
+
+window.markers = L.layerGroup().addTo(map);
+
+$.getJSON('https://gist.githubusercontent.com/paulfurley/723698b43127ddf9fe1c/raw/0778350edf1d2774476205d3a865b9ba560b15d2/citybike.json', function(apiResponse){
+  $.each(apiResponse.locations, function(){
+    var marker = L.marker([this.latitude, this.longitude], {
+      icon: new NumberedIcon({ number: this.availableBikes })
+    });
+    marker.data = this;
+    marker.bindPopup(generatePopupHTML(this.locationName, this.availableBikes, this.availableLocks), {
+      closeButton: false
+    });
+    window.markers.addLayer(marker);
+  });
+});
 
 $('#toolbar a').on('click', function(){
   $('#toolbar .active').removeClass('active').parent().siblings().children('a').addClass('active');
