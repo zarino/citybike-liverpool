@@ -32,9 +32,7 @@ var generatePopupHTML = function(locationName, availableBikes, availableLocks){
 
 window.map = L.map('map').setView([53.404973, -2.979250], 14);
 
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(window.map);
+window.map.addLayer(new L.StamenTileLayer("toner-lite"));
 
 window.markers = L.layerGroup().addTo(map);
 
