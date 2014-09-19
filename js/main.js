@@ -91,7 +91,7 @@ window.map.on('locationfound', showCurrentLocation);
 
 window.markers = L.layerGroup().addTo(map);
 
-$.getJSON('https://gist.githubusercontent.com/paulfurley/723698b43127ddf9fe1c/raw/0778350edf1d2774476205d3a865b9ba560b15d2/citybike.json', function(apiResponse){
+$.getJSON('http://api.citybikemap.paulfurley.com/v1/locations.json', function(apiResponse){
   $.each(apiResponse.locations, function(){
     var marker = L.marker([this.latitude, this.longitude], {
       icon: new NumberedIcon({ number: this.availableBikes })
