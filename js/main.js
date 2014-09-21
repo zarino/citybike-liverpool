@@ -15,7 +15,17 @@ var NumberedIcon = L.Icon.extend({
   },
   createIcon: function(){
     var $div = $('<div>');
-    $('<img>').attr('src', this.options['iconUrl']).appendTo($div);
+    if(this.options['number'] == 0){
+      this.options['iconRetinaUrl'] = L.Icon.Default.imagePath + 'marker-icon-red-2x.png'
+    } else if(this.options['number'] < 3){
+      this.options['iconRetinaUrl'] = L.Icon.Default.imagePath + 'marker-icon-amber-2x.png'
+    } else {
+      this.options['iconRetinaUrl'] = L.Icon.Default.imagePath + 'marker-icon-green-2x.png'
+    }
+    $('<img>').attr('src', this.options['iconRetinaUrl']).attr({
+      width: this.options['iconSize'][0],
+      height: this.options['iconSize'][1]
+    }).appendTo($div);
     $('<div>').addClass('number').text(this.options['number']).appendTo($div);
     this._setIconStyles($div[0], 'icon');
     return $div[0];
