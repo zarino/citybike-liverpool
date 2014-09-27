@@ -15,18 +15,22 @@ var NumberedIcon = L.Icon.extend({
   },
   createIcon: function(){
     var $div = $('<div>');
-    if(this.options['number'] == 0){
-      this.options['iconRetinaUrl'] = L.Icon.Default.imagePath + 'marker-icon-red-2x.png'
-    } else if(this.options['number'] < 3){
-      this.options['iconRetinaUrl'] = L.Icon.Default.imagePath + 'marker-icon-amber-2x.png'
+    if(this.options.number == 0){
+      this.options.iconUrl = L.Icon.Default.imagePath + 'marker-icon-red.png';
+      this.options.iconRetinaUrl = L.Icon.Default.imagePath + 'marker-icon-red-2x.png';
+    } else if(this.options.number < 3){
+      this.options.iconUrl = L.Icon.Default.imagePath + 'marker-icon-amber.png';
+      this.options.iconRetinaUrl = L.Icon.Default.imagePath + 'marker-icon-amber-2x.png';
     } else {
-      this.options['iconRetinaUrl'] = L.Icon.Default.imagePath + 'marker-icon-green-2x.png'
+      this.options.iconUrl = L.Icon.Default.imagePath + 'marker-icon-green.png';
+      this.options.iconRetinaUrl = L.Icon.Default.imagePath + 'marker-icon-green-2x.png';
     }
-    $('<img>').attr('src', this.options['iconRetinaUrl']).attr({
-      width: this.options['iconSize'][0],
-      height: this.options['iconSize'][1]
+    var src = L.Browser.retina ? this.options.iconRetinaUrl : this.options.iconUrl;
+    $('<img>').attr('src', src).attr({
+      width: this.options.iconSize[0],
+      height: this.options.iconSize[1]
     }).appendTo($div);
-    $('<div>').addClass('number').text(this.options['number']).appendTo($div);
+    $('<div>').addClass('number').text(this.options.number).appendTo($div);
     this._setIconStyles($div[0], 'icon');
     return $div[0];
   }
